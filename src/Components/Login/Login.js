@@ -1,9 +1,15 @@
 import React from "react";
-import { FloatingLabel, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useHistory, useLocation } from "react-router";
+import useAuth from "../../Hooks/useAuth";
 import "./Login.css";
 
 const Login = () => {
+
+
+
+
+
   const {
     register,
     handleSubmit,
@@ -13,6 +19,20 @@ const Login = () => {
   const onSubmit = (data) => console.log(data);
 
   console.log(watch("example"));
+
+  const { loginWithGoogle } = useAuth();
+  const location = useLocation();
+  const history = useHistory();
+  const redirect_uri = location.state?.from || "/dashboard";
+  const handleLogin = () => {
+    loginWithGoogle().then((result) => {
+      history.push(redirect_uri);
+    });
+  };
+
+
+
+
 
   return (
     <div className="d-flex justify-content-center mt-5 log-section">
@@ -47,7 +67,7 @@ const Login = () => {
           <hr />
           <p className="text-center login-with">Or</p>
         </form>
-        <button className="google-btn">
+        <button className="google-btn" onClick={handleLogin}>
           {" "}
           <img src="https://i.ibb.co/HPd5k52/pngwing-com.png" alt="" width='25px' /> Login
           with Google

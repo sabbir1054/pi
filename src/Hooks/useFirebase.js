@@ -1,11 +1,9 @@
-// import axios from "axios";
 import {
-  createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
-  signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
-  updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import AuthInitialization from "../Firebase/AuthInit";
@@ -19,49 +17,15 @@ const useFirebase = () => {
 
   const auth = getAuth();
 
-  //register new user
-  const registerNewUser = (name, email, password, role) => {
+  //login with google setup
+  const loginWithGoogle = () => {
     setIsLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        const user = result.user;
-        setUser(user);
-        updateProfile(auth.currentUser, {
-          displayName: name,
-        }).then(() => {
-          // Profile updated!
-
-          //save user in database
-        //   saveUser(email, name);
-        });
-      })
+    const googleProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleProvider)
       .catch((error) => {
         setError(error.message);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-  //saveUser database
-//   const saveUser = (email, displayName) => {
-//     const user = { email, displayName };
-
-//     axios
-//       .post("https://radiant-savannah-67340.herokuapp.com/users", user)
-//       .then(function (response) {
-//         console.log(response);
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//   };
-
-  //Login with email and password
-  const loginWithEmailPassword = (email, password) => {
-    setIsLoading(true);
-    return signInWithEmailAndPassword(auth, email, password).finally(() =>
-      setIsLoading(false)
-    );
+      .finally(() => setIsLoading(false));
   };
 
   // user state change handling
@@ -86,14 +50,10 @@ const useFirebase = () => {
   };
 
   return {
-    setUser,
     user,
     isLoading,
-    registerNewUser,
-    loginWithEmailPassword,
+    loginWithGoogle,
     logOut,
-    setError,
-    setIsLoading,
   };
 };
 
