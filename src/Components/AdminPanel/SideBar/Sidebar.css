@@ -8,7 +8,7 @@
   display: flex;
 }
 main {
-  padding: 10px;
+  width: 100%;
 }
 
 .title {
@@ -36,7 +36,7 @@ main {
   line-height: 0;
 }
 .bars {
-  width: 50px;
+  width: 30px;
 }
 .bars:hover {
   cursor: pointer;
