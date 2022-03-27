@@ -108,7 +108,7 @@ const SideBar = ({ children }) => {
               )}
             </AnimatePresence>
             <div className="bars">
-              <FaBars onClick={toggle} />
+                          <FaBars onClick={toggle} size={20}/>
             </div>
           </div>
           <hr />
