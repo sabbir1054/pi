@@ -1,0 +1,20 @@
+.food-bg{
+
+    background-image: url("https://i.ibb.co/Jym5BzH/food.png");
+    background-position:  center;
+    background-repeat: no-repeat;
+    background-size: cover ;
+    background-color: black;
+    height: 100vh;
+}
+
+.t-head{
+    background-color: #0000006e;
+    color: #c5e20f;
+}
+
+.t-body tr{
+    background-color: #ffffff69;
+    font-weight: 600;
+}
+
