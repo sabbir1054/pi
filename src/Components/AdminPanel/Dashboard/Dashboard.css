@@ -1,7 +1,37 @@
 .dash-wrapper{
-    background-color: rgb(210, 239, 255);
-    width: 100%;
-    height: 100vh;
+    background-color: #4d3aa3;
+background-image: linear-gradient(155deg, #352384 10%, #8c8cd3 90%);
+height: 100vh;
+color: white;
    
 }
+.total-student{
+  /* width: 30rem;
+  height: 35rem; */
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  background: inherit;
+  overflow: hidden;
+}
 
+.total-student:before {
+  content: "";
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; 
+    box-shadow: inset 0 0 2000px rgb(255 255 255 / 22%);
+  filter: blur(10px);
+  margin: -20px;
+}
+
+.total-student{
+    /* background-color: #fefefe;
+background-image: linear-gradient(205deg, #d1d345 0%, #00a4e4 74%); */
+/* background-color: rgba(0, 0, 0, 0.479); */
+}
