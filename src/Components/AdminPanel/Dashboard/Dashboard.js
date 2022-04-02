@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import useAuth from "../../../Hooks/useAuth";
 import "./Dashboard.css";
 const Dashboard = () => {
   const [student, setStudent] = useState([]);
 
+  const { user } = useAuth();
+ 
   // load student data
   useEffect(() => {
     fetch(
@@ -15,8 +18,10 @@ const Dashboard = () => {
 
   return (
     <div className="dash-wrapper">
-      <div className="dash-wrapper2">
-        <h1>This is Dashboard</h1>
+      <div className="dash-wrapper2  text-center">
+        <img src={`${user.photoURL}`} alt="" className="rounded-circle mt-3" />
+        <h1 className="text-center pt-3"> {`Welcome ${user.displayName}`}</h1>
+
         <Container>
           <Row className="d-flex justify-content-around pt-5">
             <Col md={4}>

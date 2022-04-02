@@ -4,8 +4,12 @@ import { FaBars, FaHome, FaUserPlus, FaUsers } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { MdFastfood, MdLogout } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 import "./Sidebar.css";
 import SidebarMenu from "./SidebarMenu";
+
+
+
 const routes = [
   {
     path: "/dashboard",
@@ -34,16 +38,16 @@ const routes = [
     name: "Food",
     icon: <MdFastfood />,
   },
-  {
-    path: "/home",
-    name: "Log Out",
-    icon: <MdLogout />,
-  },
 ];
 
 const SideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+const { user, logOut } = useAuth();
+const handleLogOut = () => {
+  logOut();
+};
+
   const inputAnimation = {
     hidden: {
       width: 0,
@@ -108,7 +112,7 @@ const SideBar = ({ children }) => {
               )}
             </AnimatePresence>
             <div className="bars">
-                          <FaBars onClick={toggle} size={20}/>
+              <FaBars onClick={toggle} size={20} />
             </div>
           </div>
           <hr />
@@ -150,6 +154,33 @@ const SideBar = ({ children }) => {
               );
             })}
           </section>
+          <div className="bottom_section ">
+            <section className="routes">
+              <NavLink
+                to="/home"
+                className="link"
+                activeClassName="active"
+                onClick={handleLogOut}
+              >
+                <div className="icon">
+                  <MdLogout />
+                </div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      variants={showAnimation}
+                      initial="hidden"
+                      animate="show"
+                      exit="hidden"
+                      className="link_text"
+                    >
+                      Log Out
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </NavLink>
+            </section>
+          </div>
         </motion.div>
         <main>{children}</main>
       </div>

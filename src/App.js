@@ -7,6 +7,7 @@ import MakeStudent from "./Components/AdminPanel/MakeStudents/MakeStudent";
 import Sidebar from "./Components/AdminPanel/SideBar/Sidebar";
 import Home from "./Components/Home/Home";
 import LoginPage from "./Components/Login/LoginPage";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import AuthProvider from "./Context/AuthProvider";
 
 function App() {
@@ -23,26 +24,25 @@ function App() {
           <Route path="/login">
             <LoginPage></LoginPage>
           </Route>
-        </Switch>
-        <Sidebar>
-          <Switch>
-            <Route path="/dashboard">
+
+          <Sidebar>
+            <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
-            </Route>
-            <Route path="/attendance">
+            </PrivateRoute>
+            <PrivateRoute path="/attendance">
               <Attendance></Attendance>
-            </Route>
-            <Route path="/students">
+            </PrivateRoute>
+            <PrivateRoute path="/students">
               <AllStudents></AllStudents>
-            </Route>
-            <Route path="/newStudent">
+            </PrivateRoute>
+            <PrivateRoute path="/newStudent">
               <MakeStudent></MakeStudent>
-            </Route>
-            <Route path="/food">
+            </PrivateRoute>
+            <PrivateRoute path="/food">
               <Food></Food>
-            </Route>
-          </Switch>
-        </Sidebar>
+            </PrivateRoute>
+          </Sidebar>
+        </Switch>
       </BrowserRouter>
     </AuthProvider>
   );

@@ -13,7 +13,7 @@ const Attendance = () => {
 
   return (
     <div className="home-bg">
-      <h1 className="text-center text-decoration-underline py-3 ">
+      <h1 className="text-center text-decoration-underline py-3 text-light ">
         Student Attendance
       </h1>
       <div className="atten-table px-3 pt-3">
