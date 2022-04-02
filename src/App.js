@@ -24,7 +24,6 @@ function App() {
           <Route path="/login">
             <LoginPage></LoginPage>
           </Route>
-
           <Sidebar>
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
