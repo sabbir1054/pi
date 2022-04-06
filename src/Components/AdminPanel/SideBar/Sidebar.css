@@ -21,7 +21,7 @@ main {
 .sidebar {
   background: rgb(0, 7, 61);
   color: white;
-  height: 100vh;
+  height: 130vh;
   overflow-y: auto;
 }
 

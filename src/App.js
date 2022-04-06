@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AllStudents from "./Components/AdminPanel/AllStudents/AllStudents";
 import Attendance from "./Components/AdminPanel/Attendance/Attendance";
+import Coffee from "./Components/AdminPanel/Coffee/Coffee";
 import Dashboard from "./Components/AdminPanel/Dashboard/Dashboard";
 import Food from "./Components/AdminPanel/Food/Food";
 import MakeStudent from "./Components/AdminPanel/MakeStudents/MakeStudent";
@@ -39,6 +40,9 @@ function App() {
             </PrivateRoute>
             <PrivateRoute path="/food">
               <Food></Food>
+            </PrivateRoute>
+            <PrivateRoute path="/coffee">
+              <Coffee></Coffee>
             </PrivateRoute>
           </Sidebar>
         </Switch>

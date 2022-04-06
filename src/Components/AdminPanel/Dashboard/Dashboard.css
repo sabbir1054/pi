@@ -1,7 +1,7 @@
 .dash-wrapper{
     background-color: #4d3aa3;
 background-image: linear-gradient(155deg, #352384 10%, #8c8cd3 90%);
-height: 100vh;
+height: 130vh;
 color: white;
    
 }
@@ -29,9 +29,18 @@ color: white;
   filter: blur(10px);
   margin: -20px;
 }
-
+select{
+      word-wrap: normal;
+    padding: 10px 15px;
+    border-radius: 7px;
+    transition: all 0.3s ease-in;
+    outline: none;
+    background-color: #7d77bd;
+    color: white;
+}
 .total-student{
     /* background-color: #fefefe;
 background-image: linear-gradient(205deg, #d1d345 0%, #00a4e4 74%); */
 /* background-color: rgba(0, 0, 0, 0.479); */
 }
+

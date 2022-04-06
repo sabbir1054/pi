@@ -1,20 +1,55 @@
+import { Dropdown } from "bootstrap";
+import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, DropdownButton, Row } from "react-bootstrap";
+import { db } from "../../../Firebase/DbInit";
 import useAuth from "../../../Hooks/useAuth";
 import "./Dashboard.css";
 const Dashboard = () => {
   const [student, setStudent] = useState([]);
-
   const { user } = useAuth();
- 
-  // load student data
+  const [mood, setMood] = useState("stop");
+  const [isActive, setIsActive] = useState(false);
+
+
+
+  //load Realtime data from firebase
+
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/sabbir1054/pi/master/src/Data.json"
-    )
-      .then((res) => res.json())
-      .then((data) => setStudent(data));
+    const studentsCollectRef = collection(db, "students_info");
+    const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
+      setStudent(
+        snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+      );
+    });
+    return () => {
+      stuMake();
+      
+    };
   }, []);
+
+
+
+
+ 
+// set machine mood status
+     const moodDb = (status) => {
+       const docRef = doc(db, "mood", "status");
+       updateDoc(docRef, { status })
+         .then((res) => {
+           //  console.log(res);
+         })
+         .catch((error) => {
+           console.log(error);
+         });
+  };
+  
+  
+   const handleButton = (mood) => {
+     setMood(mood);
+     moodDb(mood);
+     setIsActive(true);
+   };
 
   return (
     <div className="dash-wrapper">
@@ -42,7 +77,52 @@ const Dashboard = () => {
                 <h4 className="text-center">41</h4>
               </div>
             </Col>
+            <Col md={8} className="mt-5">
+              <div className="total-student  p-5 pb-3 rounded">
+                <h3 className="text-center ">Select Device Mood </h3>
+                <Row className="pt-4">
+                  <Col md={3}>
+                    <button
+                      className="google-btn   moodBtn"
+                      onClick={() => handleButton("attendance")}
+                    >
+                      Attendance
+                    </button>
+                  </Col>
+                  <Col md={3}>
+                    <button
+                      className="google-btn moodBtn"
+                      onClick={() => handleButton("food")}
+                    >
+                      Food
+                    </button>
+                  </Col>
+                  <Col md={3}>
+                    <button
+                      className="google-btn moodBtn"
+                      onClick={() => handleButton("coffee")}
+                    >
+                      Coffee
+                    </button>
+                  </Col>
+                  <Col md={3}>
+                    <button
+                      className="google-btn moodBtn"
+                      onClick={() => handleButton("stop")}
+                    >
+                      Stop
+                    </button>
+                  </Col>
+                  <p className=" mt-3 fs-3 text-warning ">
+                    {isActive
+                      ? `Device is working for ${mood}`
+                      : "Device is turned off"}
+                  </p>
+                </Row>
+              </div>
+            </Col>
           </Row>
+          <div className="mt-5  "></div>
         </Container>
       </div>
     </div>

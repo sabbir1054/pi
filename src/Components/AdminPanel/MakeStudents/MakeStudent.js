@@ -1,16 +1,32 @@
-import React from "react";
+import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { db } from "../../../Firebase/DbInit";
 import "./MakeStudent.css"
 const MakeStudent = () => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-
+  
+  
+  //make data and send
+  const onSubmit = (data) => {
+    // writeNewStudent(data);
+    const studentsCollectRef = collection(db, "students_info");
+    addDoc(studentsCollectRef, data)
+      .then((res) => {
+        reset();
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <div className="home-bg">
       <h1 className="text-decoration-underline text-center text-light py-3 ">
@@ -23,7 +39,7 @@ const MakeStudent = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="admission-form">
             <input
               placeholder="ID"
-              {...register("id", { required: true })}
+              {...register("stu_id", { required: true , reset:true})}
               className=""
             />
             {errors.idRequired && <span>This field is required</span>}
@@ -53,7 +69,7 @@ const MakeStudent = () => {
             />
             {errors.sectionRequired && <span>This field is required</span>}
             <br />
-            <input type="submit" className="submit-btn" />
+            <input type="submit" className="submit-btn"/>
           </form>
         </div>
       </Container>

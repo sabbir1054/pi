@@ -4,11 +4,11 @@ const SingleStudent = ({student}) => {
     return (
       <>
         <tr>
-          <td>{student.stu_id}</td>
-          <td>{student.name}</td>
-          <td>{student.email}</td>
-          <td>{student.class}</td>
-          <td>{student.section}</td>
+          <td>{student.data.stu_id}</td>
+          <td>{student.data.name}</td>
+          <td>{student.data.email}</td>
+          <td>{student.data.class}</td>
+          <td>{student.data.section}</td>
         </tr>
       </>
     );
