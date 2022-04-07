@@ -42,7 +42,7 @@ const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
       countMake();
     };
   }, []);
-console.log(count[0].data.count);
+
 
   // set machine mood status
   const moodDb = (status) => {
