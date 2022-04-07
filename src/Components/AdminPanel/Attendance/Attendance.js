@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { FcCancel, FcOk } from "react-icons/fc";
@@ -18,7 +18,6 @@ const Attendance = () => {
   //   const time = today.getHours() + " : " + today.getMinutes() + " "+ suffix;
 
   //load Realtime data from firebase
-
   useEffect(() => {
     const studentsCollectRef = collection(db, "students_info");
     const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
@@ -32,7 +31,6 @@ const Attendance = () => {
   }, []);
 
   //attendance data load
-
   useEffect(() => {
     const attenCollectRef = collection(db, "attendance");
     const attenMake = onSnapshot(attenCollectRef, (snapshot) => {
@@ -67,8 +65,26 @@ const Attendance = () => {
   };
   //after load data matching function call
   student.length && attenData.length && getMatch();
-  // attenNewArr.length && attenNewArr.map(arr=>)
+  
+  
+  //update attendance counter
+   const countDashboard = (count) => {
+     const docRef = doc(db, "dashboardCounter", "attendance_count");
+     updateDoc(docRef, { count })
+       .then((res) => {
+         //  console.log(res);
+       })
+       .catch((error) => {
+         console.log(error);
+       });
+   };
+  const updateCounter = () => {
+    countDashboard(attenNewArr.length)
+  }
+  attenNewArr.length && updateCounter();
 
+
+  
   return (
     <div className="home-bg">
       <h1 className="text-center text-decoration-underline py-3 text-light ">

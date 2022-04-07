@@ -1,7 +1,7 @@
 import { Dropdown } from "bootstrap";
 import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Col, Container, DropdownButton, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { db } from "../../../Firebase/DbInit";
 import useAuth from "../../../Hooks/useAuth";
 import "./Dashboard.css";
