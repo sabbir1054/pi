@@ -10,8 +10,19 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [mood, setMood] = useState("stop");
   const [isActive, setIsActive] = useState(false);
+  const [dbMood, setDbMood] = useState("");
 
+  //load Realtime data from firebase machine status
 
+  useEffect(() => {
+    const dbMoodCollectRef = collection(db, "mood");
+    const dbMoodMake = onSnapshot(dbMoodCollectRef, (snapshot) => {
+      setDbMood(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+    });
+    return () => {
+      dbMoodMake();
+    };
+  }, []);
 
   //load Realtime data from firebase
 
@@ -24,32 +35,26 @@ const Dashboard = () => {
     });
     return () => {
       stuMake();
-      
     };
   }, []);
 
-
-
-
- 
-// set machine mood status
-     const moodDb = (status) => {
-       const docRef = doc(db, "mood", "status");
-       updateDoc(docRef, { status })
-         .then((res) => {
-           //  console.log(res);
-         })
-         .catch((error) => {
-           console.log(error);
-         });
+  // set machine mood status
+  const moodDb = (status) => {
+    const docRef = doc(db, "mood", "status");
+    updateDoc(docRef, { status })
+      .then((res) => {
+        //  console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-  
-  
-   const handleButton = (mood) => {
-     setMood(mood);
-     moodDb(mood);
-     setIsActive(true);
-   };
+
+  const handleButton = (mood) => {
+    setMood(mood);
+    moodDb(mood);
+    setIsActive(true);
+  };
 
   return (
     <div className="dash-wrapper">
@@ -114,9 +119,9 @@ const Dashboard = () => {
                     </button>
                   </Col>
                   <p className=" mt-3 fs-3 text-warning ">
-                    {isActive
-                      ? `Device is working for ${mood}`
-                      : "Device is turned off"}
+                    {
+                    `Device is working for ${dbMood&&dbMood[0].data.status}`
+                      }
                   </p>
                 </Row>
               </div>

@@ -71,7 +71,7 @@ const Attendance = () => {
   };
   //after load data matching function call
   student.length && attenData.length && getMatch();
-
+// attenNewArr.length && attenNewArr.map(arr=>)
  
   return (
     <div className="home-bg">
@@ -79,6 +79,8 @@ const Attendance = () => {
         Student Attendance
       </h1>
       <div className="atten-table px-3 pt-3">
+ 
+
         <Table striped bordered hover>
           <thead className="t-head">
             <tr>
@@ -92,13 +94,7 @@ const Attendance = () => {
               <th>Time</th>
             </tr>
           </thead>
-          <tbody className="t-body">
-            {/* {
-              attenNewArr.length && attenNewArr.map(atten => {
-               <SingleAttendance atten={atten}></SingleAttendance>
-             })
-          } */}
-          </tbody>
+          <tbody className="t-body"></tbody>
         </Table>
       </div>
     </div>
