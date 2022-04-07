@@ -7,8 +7,20 @@ import SingleCoffee from "./SingleCoffee";
 const Coffee = () => {
   const [student, setStudent] = useState([]);
   const [coffeeData, setCoffeeData] = useState([]);
-  //coffee data
+  
+  
+  
+  //load data from database
   useEffect(() => {
+//all student data load
+    const studentsCollectRef = collection(db, "students_info");
+    const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
+      setStudent(
+        snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+      );
+    });
+
+    //coffee data scan
     const coffeeCollectRef = collection(db, "coffee");
     const coffeeMake = onSnapshot(coffeeCollectRef, (snapshot) => {
       setCoffeeData(
@@ -16,21 +28,11 @@ const Coffee = () => {
       );
     });
     return () => {
+        stuMake();
       coffeeMake();
     };
   }, []);
-  // load all student data
-  useEffect(() => {
-    const studentsCollectRef = collection(db, "students_info");
-    const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
-      setStudent(
-        snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-      );
-    });
-    return () => {
-      stuMake();
-    };
-  }, []);
+  
 
   //matches data with food and student
   let arr1 = [];
@@ -55,7 +57,7 @@ const Coffee = () => {
   //after load data matching function call
   student.length && coffeeData.length && getMatch();
 
-  newArr.length && console.log(newArr);
+ 
   return (
     <>
       <div className="students-wrapper">

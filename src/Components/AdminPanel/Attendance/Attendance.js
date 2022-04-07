@@ -1,7 +1,6 @@
 import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { FcCancel, FcOk } from "react-icons/fc";
 import { db } from "../../../Firebase/DbInit";
 import SingleAttendance from "./SingleAttendance";
 
@@ -17,21 +16,18 @@ const Attendance = () => {
   //   const suffix = today.getHours() >= 12 ? "PM" : "AM";
   //   const time = today.getHours() + " : " + today.getMinutes() + " "+ suffix;
 
+
+  
   //load Realtime data from firebase
   useEffect(() => {
+    //all students
     const studentsCollectRef = collection(db, "students_info");
     const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
       setStudent(
         snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
       );
     });
-    return () => {
-      stuMake();
-    };
-  }, []);
-
-  //attendance data load
-  useEffect(() => {
+    //scanning card data
     const attenCollectRef = collection(db, "attendance");
     const attenMake = onSnapshot(attenCollectRef, (snapshot) => {
       setAttenData(
@@ -39,6 +35,7 @@ const Attendance = () => {
       );
     });
     return () => {
+      stuMake();
       attenMake();
     };
   }, []);
@@ -65,26 +62,23 @@ const Attendance = () => {
   };
   //after load data matching function call
   student.length && attenData.length && getMatch();
-  
-  
+
   //update attendance counter
-   const countDashboard = (count) => {
-     const docRef = doc(db, "dashboardCounter", "attendance_count");
-     updateDoc(docRef, { count })
-       .then((res) => {
-         //  console.log(res);
-       })
-       .catch((error) => {
-         console.log(error);
-       });
-   };
+  const countDashboard = (count) => {
+    const docRef = doc(db, "dashboardCounter", "attendance_count");
+    updateDoc(docRef, { count })
+      .then((res) => {
+        //  console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const updateCounter = () => {
-    countDashboard(attenNewArr.length)
-  }
+    countDashboard(attenNewArr.length);
+  };
   attenNewArr.length && updateCounter();
 
-
-  
   return (
     <div className="home-bg">
       <h1 className="text-center text-decoration-underline py-3 text-light ">
@@ -107,7 +101,10 @@ const Attendance = () => {
           <tbody className="t-body">
             {attenNewArr.length &&
               attenNewArr.map((atten) => (
-                <SingleAttendance atten={atten} key={atten.stu_id}></SingleAttendance>
+                <SingleAttendance
+                  atten={atten}
+                  key={atten.stu_id}
+                ></SingleAttendance>
               ))}
           </tbody>
         </Table>

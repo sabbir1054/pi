@@ -11,32 +11,38 @@ const Dashboard = () => {
   const [mood, setMood] = useState("stop");
   const [isActive, setIsActive] = useState(false);
   const [dbMood, setDbMood] = useState("");
-
-  //load Realtime data from firebase machine status
+  const [count, setCount] = useState('');
+  
+  //load Realtime data from firebase
 
   useEffect(() => {
+//all student data
+const studentsCollectRef = collection(db, "students_info");
+const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
+  setStudent(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+});
+    //mood
     const dbMoodCollectRef = collection(db, "mood");
     const dbMoodMake = onSnapshot(dbMoodCollectRef, (snapshot) => {
       setDbMood(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
     });
-    return () => {
-      dbMoodMake();
-    };
-  }, []);
 
-  //load Realtime data from firebase
 
-  useEffect(() => {
-    const studentsCollectRef = collection(db, "students_info");
-    const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
-      setStudent(
+// counter data
+    const counterCollectRef = collection(db, 'dashboardCounter');
+    const countMake = onSnapshot(counterCollectRef, (snapshot) => {
+      setCount(
         snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
       );
     });
+
     return () => {
       stuMake();
+      dbMoodMake();
+      countMake();
     };
   }, []);
+console.log(count[0].data.count);
 
   // set machine mood status
   const moodDb = (status) => {
@@ -73,13 +79,17 @@ const Dashboard = () => {
             <Col md={4}>
               <div className="total-student  p-5 rounded">
                 <h3 className="text-center">Present students</h3>
-                <h4 className="text-center">75</h4>
+                <h4 className="text-center">
+                  {count.length && count[0].data.count}
+                </h4>
               </div>
             </Col>
             <Col md={4}>
               <div className="total-student  p-5 rounded">
                 <h3 className="text-center">Take Food </h3>
-                <h4 className="text-center">41</h4>
+                <h4 className="text-center">
+                  {count.length && count[1].data.count}
+                </h4>
               </div>
             </Col>
             <Col md={8} className="mt-5">
@@ -119,9 +129,7 @@ const Dashboard = () => {
                     </button>
                   </Col>
                   <p className=" mt-3 fs-3 text-warning ">
-                    {
-                    `Device is working for ${dbMood&&dbMood[0].data.status}`
-                      }
+                    {`Device is working for ${dbMood && dbMood[0].data.status}`}
                   </p>
                 </Row>
               </div>

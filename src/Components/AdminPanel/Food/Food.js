@@ -11,6 +11,15 @@ const Food = () => {
 
   //coffee data
   useEffect(() => {
+//all student data load
+    const studentsCollectRef = collection(db, "students_info");
+    const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
+      setStudent(
+        snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+      );
+    });
+
+    // food data scan
     const foodCollectRef = collection(db, "foods");
     const foodMake = onSnapshot(foodCollectRef, (snapshot) => {
       setFoodData(
@@ -18,22 +27,12 @@ const Food = () => {
       );
     });
     return () => {
+       stuMake();
       foodMake();
     };
   }, []);
 
-  //set student by realtime database
-  useEffect(() => {
-    const studentsCollectRef = collection(db, "students_info");
-    const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
-      setStudent(
-        snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-      );
-    });
-    return () => {
-      stuMake();
-    };
-  }, []);
+
 
   //matches data with food and student
   let arr1 = [];
