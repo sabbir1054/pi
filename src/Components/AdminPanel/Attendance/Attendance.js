@@ -5,14 +5,11 @@ import { FcCancel, FcOk } from "react-icons/fc";
 import { db } from "../../../Firebase/DbInit";
 import SingleAttendance from "./SingleAttendance";
 
-
-
-
 const Attendance = () => {
   // const [date, setdate] = useState('');
   const [student, setStudent] = useState([]);
   const [attenData, setAttenData] = useState([]);
- 
+
   // date and time
   // const today = new Date();
   // const date =
@@ -67,20 +64,17 @@ const Attendance = () => {
         }
       }
     }
-    
   };
   //after load data matching function call
   student.length && attenData.length && getMatch();
-// attenNewArr.length && attenNewArr.map(arr=>)
- 
+  // attenNewArr.length && attenNewArr.map(arr=>)
+
   return (
     <div className="home-bg">
       <h1 className="text-center text-decoration-underline py-3 text-light ">
         Student Attendance
       </h1>
       <div className="atten-table px-3 pt-3">
- 
-
         <Table striped bordered hover>
           <thead className="t-head">
             <tr>
@@ -94,7 +88,12 @@ const Attendance = () => {
               <th>Time</th>
             </tr>
           </thead>
-          <tbody className="t-body"></tbody>
+          <tbody className="t-body">
+            {attenNewArr.length &&
+              attenNewArr.map((atten) => (
+                <SingleAttendance atten={atten} key={atten.stu_id}></SingleAttendance>
+              ))}
+          </tbody>
         </Table>
       </div>
     </div>

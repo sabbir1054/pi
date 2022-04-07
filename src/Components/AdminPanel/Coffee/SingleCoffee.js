@@ -1,19 +1,17 @@
-import React from 'react';
+import React from "react";
 
-const SingleCoffee = () => {
-    return (
-        <>
-            <tr>
-                <td>ok</td>
-          {/* <td>{student.data.stu_id}</td>
-          <td>{student.data.name}</td>
-          <td>{student.data.email}</td>
-          <td>{student.data.class}</td>
-          <td>{student.data.section}</td> */}
-        </tr>
-      
-        </>
-    );
+const SingleCoffee = ({ coffee }) => {
+  return (
+    <>
+      <tr>
+        <td>{coffee.stu_id}</td>
+        <td>{coffee.name}</td>
+        <td>{coffee.email}</td>
+        <td>{coffee.class}</td>
+        <td>{coffee.section}</td>
+      </tr>
+    </>
+  );
 };
 
 export default SingleCoffee;

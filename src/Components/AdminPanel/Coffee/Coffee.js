@@ -1,8 +1,8 @@
-import { collection, onSnapshot } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
-import { db } from '../../../Firebase/DbInit';
-import SingleCoffee from './SingleCoffee';
+import { collection, onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import { db } from "../../../Firebase/DbInit";
+import SingleCoffee from "./SingleCoffee";
 
 const Coffee = () => {
   const [student, setStudent] = useState([]);
@@ -55,36 +55,35 @@ const Coffee = () => {
   //after load data matching function call
   student.length && coffeeData.length && getMatch();
 
-  newArr.length&&console.log(newArr);
-    return (
-      <>
-        <div className="students-wrapper">
-          <h1 className="text-center py-3 text-decoration-underline text-light">
-            Take Coffee
-          </h1>
-          <div className="stu-table px-3 pt-3">
-            <Table striped bordered hover>
-              <thead className="t-head">
-                <tr>
-                  <th>Id</th>
-                  <th>Student Name</th>
-                  <th>Student Email</th>
-                  <th>Class/Department</th>
-                  <th>Section</th>
-                </tr>
-              </thead>
-                        <tbody className="t-body">
-                            
-                            {
-                                newArr.length&&newArr.map((coffee)=>{<SingleCoffee coffee={coffee}></SingleCoffee>})
-                            }
-                
-              </tbody>
-            </Table>
-          </div>
+  newArr.length && console.log(newArr);
+  return (
+    <>
+      <div className="students-wrapper">
+        <h1 className="text-center py-3 text-decoration-underline text-light">
+          Take Coffee
+        </h1>
+        <div className="stu-table px-3 pt-3">
+          <Table striped bordered hover>
+            <thead className="t-head">
+              <tr>
+                <th>Id</th>
+                <th>Student Name</th>
+                <th>Student Email</th>
+                <th>Class/Department</th>
+                <th>Section</th>
+              </tr>
+            </thead>
+            <tbody className="t-body">
+              {newArr.length &&
+                newArr.map((coffee) => (
+                  <SingleCoffee coffee={coffee} key={coffee.stu_id}></SingleCoffee>
+                ))}
+            </tbody>
+          </Table>
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 };
 
 export default Coffee;

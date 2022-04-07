@@ -55,27 +55,8 @@ const getMatch = () => {
 //after load data matching function call
 student.length && foodData.length && getMatch();
 
-// console.log(newArr);
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(newArr);
+  
 
   return (
     <div className="food-bg">
@@ -94,11 +75,11 @@ student.length && foodData.length && getMatch();
           </thead>
           <tbody className="t-body">
             
-            {/* {
-              newArr.length && newArr.map(food => {
-                <SingleFood food={food}/>
-              })
-            } */}
+            {
+              newArr.length && newArr.map(food => (
+                <SingleFood food={food} key={ food.stu_id}/>
+              ))
+            }
           </tbody>
         </Table>
       </div>

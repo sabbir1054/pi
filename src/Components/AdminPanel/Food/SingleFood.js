@@ -1,13 +1,14 @@
 import React from 'react';
 import { FcCancel, FcOk } from "react-icons/fc";
-const SingleFood = () => {
+const SingleFood = ({food}) => {
     return (
       <tr>
-        <td>stu_id</td>
-        <td>student.name</td>
-        <td>student.email</td>
-        <td>student.class</td>
-        <td>student.section</td>
+        <td>{food.stu_id}</td>
+        <td>{food.name}</td>
+        <td>{food.email}</td>
+        <td>{food.class}</td>
+        <td>{food.section}</td>
+
         <td>
           <FcOk size={25}></FcOk>
         </td>

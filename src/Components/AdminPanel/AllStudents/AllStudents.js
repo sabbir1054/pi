@@ -43,7 +43,7 @@ const AllStudents = () => {
             </thead>
             <tbody className='t-body'>
               {student.map((student) => (
-                <SingleStudent student={student} />
+                <SingleStudent student={student} key={student.id }/>
               ))}
             </tbody>
           </Table>
