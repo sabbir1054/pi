@@ -123,14 +123,22 @@ const stuMake = onSnapshot(studentsCollectRef, (snapshot) => {
                   <Col md={3}>
                     <button
                       className="google-btn moodBtn"
-                      onClick={() => handleButton("stop")}
+                      onClick={() => handleButton("umbrella")}
                     >
-                      Stop
+                      Umbrella
                     </button>
                   </Col>
                   <p className=" mt-3 fs-3 text-warning ">
                     {`Device is working for ${dbMood && dbMood[0].data.status}`}
                   </p>
+                </Row>
+                <Row>
+                  <button
+                    className="google-btn moodBtn w-25 mx-auto"
+                    onClick={() => handleButton("stop")}
+                  >
+                    Stop
+                  </button>
                 </Row>
               </div>
             </Col>
