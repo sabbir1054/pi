@@ -17,8 +17,8 @@ const SingleAttendance = ({atten}) => {
           <FcOk size={25}></FcOk>
         </td>
 
-        {/* <td>{`date`}</td>
-        <td>{`time`}</td> */}
+        {/* <td>{`date`}</td> */}
+        {/* <td>{atten.attten_date_time}</td> */}
       
       </tr>
     </>

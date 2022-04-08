@@ -83,12 +83,7 @@ const Attendance = () => {
   };
   attenNewArr.length && updateCounter();
 
-  //delete attendance
-  const deletteAttendance = (id) => {
-    console.log(id);
-    // const docRef = doc(db, "attendance", id);
-    // deleteDoc(docRef).then().catch();
-  };
+  
 
   return (
     <div className="home-bg">
@@ -105,8 +100,8 @@ const Attendance = () => {
               <th>Class/Department</th>
               <th>Section</th>
               <th>Attendance</th>
-              <th>Date</th>
-              <th>Time</th>
+              {/* <th>Date</th>
+              <th>Time</th> */}
             </tr>
           </thead>
           <tbody className="t-body">
