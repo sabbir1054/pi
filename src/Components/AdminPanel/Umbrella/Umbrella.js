@@ -75,7 +75,7 @@ const Umbrella = () => {
                 <th>Student Email</th>
                 <th>Class/Department</th>
                 <th>Section</th>
-                <th>Return Umbrella Here</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody className="t-body">
