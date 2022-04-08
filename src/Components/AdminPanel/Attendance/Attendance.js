@@ -1,4 +1,10 @@
-import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { db } from "../../../Firebase/DbInit";
@@ -16,8 +22,6 @@ const Attendance = () => {
   //   const suffix = today.getHours() >= 12 ? "PM" : "AM";
   //   const time = today.getHours() + " : " + today.getMinutes() + " "+ suffix;
 
-
-  
   //load Realtime data from firebase
   useEffect(() => {
     //all students
@@ -78,6 +82,13 @@ const Attendance = () => {
     countDashboard(attenNewArr.length);
   };
   attenNewArr.length && updateCounter();
+
+  //delete attendance
+  const deletteAttendance = (id) => {
+    console.log(id);
+    // const docRef = doc(db, "attendance", id);
+    // deleteDoc(docRef).then().catch();
+  };
 
   return (
     <div className="home-bg">

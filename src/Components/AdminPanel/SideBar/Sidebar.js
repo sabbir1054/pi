@@ -1,6 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FaBars, FaHome, FaUserPlus, FaUsers } from "react-icons/fa";
+import {
+  FaBars,
+  FaHome,
+  FaUserPlus,
+  FaUsers,
+  FaUmbrella,
+} from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { FiCoffee } from "react-icons/fi";
 import { MdFastfood, MdLogout } from "react-icons/md";
@@ -43,6 +49,11 @@ const routes = [
     path: "/coffee",
     name: "Coffee",
     icon: <FiCoffee />,
+  },
+  {
+    path: "/umbrella",
+    name: "Umbrella",
+    icon: <FaUmbrella />,
   },
 ];
 

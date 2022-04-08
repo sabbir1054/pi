@@ -9,6 +9,7 @@ import Sidebar from "./Components/AdminPanel/SideBar/Sidebar";
 import Home from "./Components/Home/Home";
 import LoginPage from "./Components/Login/LoginPage";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import Umbrella from "./Components/AdminPanel/Umbrella/Umbrella";
 import AuthProvider from "./Context/AuthProvider";
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
             </PrivateRoute>
             <PrivateRoute path="/coffee">
               <Coffee></Coffee>
+            </PrivateRoute>
+            <PrivateRoute path="/umbrella">
+              <Umbrella></Umbrella>
             </PrivateRoute>
           </Sidebar>
         </Switch>
